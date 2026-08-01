@@ -6,6 +6,6 @@
 version: 2
 updates:
   - package-ecosystem: "uv" # See documentation for possible values
-    directory: "/skills/**" # Location of package manifests
+    directory: "/skills/business-discovery" # Location of package manifests
     schedule:
       interval: "weekly"
