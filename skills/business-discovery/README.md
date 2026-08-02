@@ -26,17 +26,29 @@ export GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 ## Usage
 
 ### Using `uv run`
-Execute the discovery script directly with `uv`:
+Execute the discovery or CSV exporter scripts directly with `uv`:
 
+#### Business Discovery CLI
 ```bash
 uv run scripts/discover.py --area "Paldi, Ahmedabad, Gujarat, India" --radius 5000 --purpose "plumbers" --max-results 50
 ```
 
+#### CSV Exporter Script (Saves CSV to Current Working Directory)
+```bash
+uv run scripts/export_csv.py --area "Paldi, Ahmedabad, Gujarat, India" --radius 5000 --purpose "plumbers" --output "plumbers_paldi.csv"
+```
+or convert existing JSON results:
+```bash
+uv run scripts/export_csv.py --input-json "results.json" --output "results.csv"
+```
+
 ### Options
-- `--area`: Address or area string (Required)
-- `--radius`: Search radius in meters (Required, e.g. `5000`)
-- `--purpose`: Business purpose / keyword (Required, e.g. `"plumbers"`, `"cafes"`)
+- `--area`: Address or area string (e.g. `"Paldi, Ahmedabad, Gujarat, India"`)
+- `--radius`: Search radius in meters (e.g. `5000`)
+- `--purpose`: Business purpose / keyword (e.g. `"plumbers"`, `"cafes"`)
 - `--max-results`: Maximum top results to return (Default: `50`, Capped at `50`)
 - `--sort-by`: Sorting criteria (`rating` or `distance`, Default: `rating`)
 - `--json`: Output raw JSON for programmatic integration
 - `--fetch-details`: Fetch additional place details (phone number, website)
+- `--output` / `--output-csv`: Specify output CSV filename (saved in current working directory)
+- `--input-json`: Read pre-existing JSON discovery results for offline CSV generation

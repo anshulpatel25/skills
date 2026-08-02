@@ -27,10 +27,12 @@ from rich.table import Table
 
 try:
     from .config import Config, ConfigurationError
+    from .csv_exporter import CSVExporter, CSVExporterError
     from .maps_service import GoogleMapsService, GoogleMapsServiceError
     from .models import BusinessSearchParams
 except ImportError:
     from config import Config, ConfigurationError
+    from csv_exporter import CSVExporter, CSVExporterError
     from maps_service import GoogleMapsService, GoogleMapsServiceError
     from models import BusinessSearchParams
 
@@ -82,6 +84,12 @@ def create_parser() -> argparse.ArgumentParser:
         "--json",
         action="store_true",
         help="Output raw JSON format for programmatic use.",
+    )
+    parser.add_argument(
+        "--output-csv",
+        type=str,
+        default=None,
+        help="Optional CSV filename/path to export results to current working directory.",
     )
     parser.add_argument(
         "--api-key",
@@ -159,6 +167,11 @@ def main(args_list: Optional[list[str]] = None) -> int:
         )
 
         result = service.search_businesses(params)
+
+        if args.output_csv:
+            csv_path = CSVExporter.export_to_csv(result, output_filename=args.output_csv, output_dir=Path.cwd())
+            if not args.json:
+                console.print(f"[bold green]✓ CSV file exported to:[/bold green] {csv_path}")
 
         if args.json:
             print(result.model_dump_json(indent=2))

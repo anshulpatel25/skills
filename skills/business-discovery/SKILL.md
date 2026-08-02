@@ -34,10 +34,27 @@ export GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 | `sort_by` | No | Ranking criteria (`rating` or `distance`) | `rating` | `rating` |
 | `fetch_details` | No | Fetch phone number & website for each place | `false` | `--fetch-details` |
 | `json` | No | Return output as structured JSON | `false` | `--json` |
+| `output_csv` / `output` | No | Generate CSV file stored in current working directory | - | `plumbers_paldi.csv` |
 
 ## Execution Instructions
 
-Run the python discovery tool using `uv` from the repository root:
+Run the python discovery or CSV exporter tools using `uv` from the repository root:
+
+### Direct CSV Export (Live Search saved to Current Working Directory)
+```bash
+uv run skills/business-discovery/scripts/export_csv.py \
+  --area "Paldi, Ahmedabad, Gujarat, India" \
+  --radius 5000 \
+  --purpose "plumbers" \
+  --output "plumbers_paldi.csv"
+```
+
+### Convert Existing JSON Discovery Results to CSV
+```bash
+uv run skills/business-discovery/scripts/export_csv.py \
+  --input-json "results.json" \
+  --output "plumbers.csv"
+```
 
 ### Standard Execution (Top 50 rated businesses, JSON output for AI parsing)
 ```bash
@@ -50,14 +67,14 @@ uv run skills/business-discovery/scripts/discover.py \
   --json
 ```
 
-### Fetching Detailed Info (Phone & Website)
+### Discovery Execution with CSV Export
 ```bash
 uv run skills/business-discovery/scripts/discover.py \
   --area "Paldi, Ahmedabad, Gujarat, India" \
   --radius 5000 \
   --purpose "plumbers" \
   --fetch-details \
-  --json
+  --output-csv "plumbers_detailed.csv"
 ```
 
 ### Formatted Terminal Output (Human readable table)
