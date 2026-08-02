@@ -37,9 +37,14 @@ uv run scripts/discover.py --area "Paldi, Ahmedabad, Gujarat, India" --radius 50
 ```bash
 uv run scripts/export_csv.py --area "Paldi, Ahmedabad, Gujarat, India" --radius 5000 --purpose "plumbers" --output "plumbers_paldi.csv"
 ```
-or convert existing JSON results:
+
+#### KML Exporter Script (Saves KML to Current Working Directory for Google Earth)
 ```bash
-uv run scripts/export_csv.py --input-json "results.json" --output "results.csv"
+uv run scripts/export_kml.py --area "Paldi, Ahmedabad, Gujarat, India" --radius 5000 --purpose "plumbers" --output "plumbers_paldi.kml"
+```
+or convert existing JSON results to KML:
+```bash
+uv run scripts/export_kml.py --input-json "results.json" --output "results.kml"
 ```
 
 ### Options
@@ -50,5 +55,5 @@ uv run scripts/export_csv.py --input-json "results.json" --output "results.csv"
 - `--sort-by`: Sorting criteria (`rating` or `distance`, Default: `rating`)
 - `--json`: Output raw JSON for programmatic integration
 - `--fetch-details`: Fetch additional place details (phone number, website)
-- `--output` / `--output-csv`: Specify output CSV filename (saved in current working directory)
-- `--input-json`: Read pre-existing JSON discovery results for offline CSV generation
+- `--output` / `--output-csv` / `--output-kml`: Specify output filename (saved in current working directory)
+- `--input-json`: Read pre-existing JSON discovery results for offline CSV/KML generation

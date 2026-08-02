@@ -34,11 +34,28 @@ export GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 | `sort_by` | No | Ranking criteria (`rating` or `distance`) | `rating` | `rating` |
 | `fetch_details` | No | Fetch phone number & website for each place | `false` | `--fetch-details` |
 | `json` | No | Return output as structured JSON | `false` | `--json` |
-| `output_csv` / `output` | No | Generate CSV file stored in current working directory | - | `plumbers_paldi.csv` |
+| `output_csv` | No | Generate CSV file stored in current working directory | - | `plumbers_paldi.csv` |
+| `output_kml` | No | Generate KML file stored in current working directory | - | `plumbers_paldi.kml` |
 
 ## Execution Instructions
 
-Run the python discovery or CSV exporter tools using `uv` from the repository root:
+Run the python discovery, CSV, or KML exporter tools using `uv` from the repository root:
+
+### Direct KML Export (Live Search saved to Current Working Directory)
+```bash
+uv run skills/business-discovery/scripts/export_kml.py \
+  --area "Paldi, Ahmedabad, Gujarat, India" \
+  --radius 5000 \
+  --purpose "plumbers" \
+  --output "plumbers_paldi.kml"
+```
+
+### Convert Existing JSON Discovery Results to KML
+```bash
+uv run skills/business-discovery/scripts/export_kml.py \
+  --input-json "results.json" \
+  --output "plumbers.kml"
+```
 
 ### Direct CSV Export (Live Search saved to Current Working Directory)
 ```bash
