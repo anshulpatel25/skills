@@ -7,7 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
     "googlemaps>=4.10.0",
     "pydantic>=2.10.0",
-    "pydantic-settings>=2.0.0",
+    "pydantic-settings>=2.15.0",
     "python-dotenv>=1.0.1",
     "rich>=13.9.0",
 ]
